@@ -12,7 +12,7 @@
                 <!-- post -->
                 {% for post in queryset %}
                 <div class="col-xl-6">
-                  <a class="mb-3" href="post.html">
+                  <a class="mb-3" href="{{ post.get_absolute_url }}">
                     <img class="img-fluid" src="{% static 'img/blog-post-1.jpeg' %}" alt="..."/>
                   </a>
                   <div class="d-flex align-items-center justify-content-between mb-2">
@@ -21,7 +21,7 @@
                     {% endfor %}
                   </div>
                   <h3 class="h4">
-                    <a class="text-dark" href="#">{{ post.title }}</a>
+                    <a class="text-dark" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
                   </h3>
                   <p class="text-muted text-sm">{{ post.overview}}</p>
                   <ul class="list-inline list-separated text-gray-500 mb-0">
@@ -45,7 +45,7 @@
                   {% if queryset.has_previous %}
                   <li class="page-item"><a class="page-link" href="?{{ page_request_var }}={{ queryset.previous_page_number }}"><i class="fas fa-angle-left"></i></a></li>
                   {% endif %}
-                  <li class="page-item active"><a class="page-link" href="#">{{ queryset.number}}</a></li>
+                  <li class="page-item active"><a class="page-link" href="?{{ page_request_var }}={{ queryset.number }}">{{ queryset.number}}</a></li>
                   {% if queryset.has_next %}
                   <li class="page-item"><a class="page-link" href="?{{ page_request_var }}={{ queryset.next_page_number }}"><i class="fas fa-angle-right"></i></a></li>
                   {% endif %}
@@ -71,14 +71,14 @@
               <div class="card-body">
                 <h3 class="h6 mb-3">Latest Posts</h3>
                   {% for post in most_recent %}
-                  <a class="text-reset mb-3" href="!#">
+                  <a class="text-reset mb-3" href="{{ post.get_absolute_url }}">
                     <div class="d-flex align-items-center">
                       <img class="img-fluid flex-shrink-0" src="{{ post.thumbnail.url }}" alt="..." width="55">
                       <div class="ms-3">
                         <p class="mb-2 fw-bold text-gray-700 lh-1">{{ post.title }}</p>
                         <ul class="list-inline list-separated text-gray-500 d-flex align-items-center">
-                          <li class="list-inline-item small"><i class="far fa-eye"></i>{{ post.view_count }}</li>
-                          <li class="list-inline-item small"><i class="far fa-comment"></i>{{ post.comment_count }}</li>
+                          <li class="list-inline-item small"><i class="far fa-eye"></i> {{ post.view_count }}</li>
+                          <li class="list-inline-item small"><i class="far fa-comment"></i> {{ post.comment_count }}</li>
                         </ul>
                       </div>
                     </div>
